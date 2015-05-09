@@ -19,6 +19,7 @@ namespace Shouter.Models
             MongoDB.Driver.Builders.SortByBuilder sort = new MongoDB.Driver.Builders.SortByBuilder();
             sort.Descending("dateTime");
             return comments.FindAll().SetSortOrder(sort).ToList<Comment>();
+            
         }
 
         public static void InsertComment(Comment comment)

@@ -19,6 +19,7 @@ namespace Shouter.Models
             if (email != "" && password != "")
             {
                 MongoDatabase db = DBConnection.Db();
+                
                 var users = db.GetCollection("users");
                 var query = new QueryDocument("email", email);
                 var currentUser = users.FindOne(query);

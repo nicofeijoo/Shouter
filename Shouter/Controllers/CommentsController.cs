@@ -20,11 +20,25 @@ namespace Shouter.Controllers
         [HttpPost]
         public ActionResult Index(string commentText)
         {
+                Comment newComment = new Comment();
+                newComment.email = Session["email"].ToString();
+                newComment.comment = commentText;
+                CommentsModel.InsertComment(newComment);
+
+                return RedirectToAction("Index", "Comments");   
+        }
+
+        [HttpPost]
+        public JsonResult AgregarComentario(string Comentario) 
+        {
+            var resultado = new JsonResult();
+
             Comment newComment = new Comment();
             newComment.email = Session["email"].ToString();
-            newComment.comment = commentText;
+            newComment.comment = Comentario;
             CommentsModel.InsertComment(newComment);
-            return RedirectToAction("Index", "Comments");
+
+            return resultado;
         }
     }
 }

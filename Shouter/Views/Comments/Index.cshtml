@@ -1,30 +1,53 @@
 ﻿@model IEnumerable<Shouter.Models.Comment>
 
+<script type="text/javascript" language="javascript">
+   function AgregarComentariO() {
+            var comments = $('#commentText').val();
+
+            $.ajax({
+                url: '/Comments/AgregarComentario/',
+                data: { 'Comentario': comments },
+                type: "post",
+                cache: false,
+                async: true,
+                success: function (savingStatus) {
+                    alert('Comentario guardado correctamente');
+                    location.reload();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('El comentario no pudo ser guardado debido a errores de conexion');
+                }
+            });
+        
+    }
+</script>
+<h2>Página de inicio
+
 @{
-    ViewBag.Title = "Your posts";
+    ViewBag.Title = "Tus posteos";
 }
 
-<h2>Welcome @Session["email"] !</h2>
+<h2>Bienvenido @Session["email"] !</h2>
 
 <p>
     @using (Html.BeginForm())
     {
         <div>
-        <p>Insert your comment:</p> @Html.TextArea("commentText")
-        <input type="submit" value="Post" class="btn"/>
+        <p>Ingresa tu comentario:</p> @Html.TextArea("commentText", new { @placeholder = "Haz tu comentario!",required = "required"})
+        <input type="button" value="Post" class="btn" id="btnSend" onclick="AgregarComentariO();" />
         </div>
     }
 </p>
 <table class="table">
     <tr>
         <th>
-            User
+            Usuario
         </th>
         <th>
-            Posted
+            Hace
         </th>
         <th>
-            Text
+            Mensaje
         </th>
     </tr>
 
@@ -36,19 +59,44 @@
         </td>
         <td>
             @{
-    double time = Math.Truncate((DateTime.Now-item.dateTime).TotalMinutes);
     double timeToShow;
-    if (time > 60)
+
+    if (DateTime.Now.Year > item.dateTime.Year)
     {
-        timeToShow = Math.Truncate(time / 60);
-        <text>@timeToShow hours ago</text>
+        timeToShow = DateTime.Now.Year - item.dateTime.Year;
+        <text>@timeToShow years ago</text>
     }
-    else
+    else if (DateTime.Now.Month > item.dateTime.Month)
     {
-        timeToShow = time;
-        <text>@timeToShow minutes ago</text>
+        timeToShow = DateTime.Now.Month - item.dateTime.Month;
+        <text>@timeToShow months ago</text>
     }
-        }
+    else if (DateTime.Now.DayOfWeek > item.dateTime.DayOfWeek)
+    {
+        timeToShow = DateTime.Now.DayOfWeek - item.dateTime.DayOfWeek;
+        <text>@timeToShow weeks ago</text>
+    }
+    else if (DateTime.Now.DayOfYear > item.dateTime.DayOfYear)
+    {
+        timeToShow = DateTime.Now.DayOfYear - item.dateTime.DayOfYear;
+        <text>@timeToShow days ago</text>
+    }
+    else if (DateTime.Now.Hour > item.dateTime.Hour)
+    {
+        timeToShow = DateTime.Now.Hour - item.dateTime.Hour;
+        <text>@timeToShow Hours ago</text>
+    }
+    else if (DateTime.Now.Minute > item.dateTime.Minute)
+    {
+        timeToShow = DateTime.Now.Minute - item.dateTime.Minute;
+        <text>@timeToShow Minutes ago</text>
+    }
+    else if (DateTime.Now.Second > item.dateTime.Second)
+    {
+        timeToShow = DateTime.Now.Second - item.dateTime.Second;
+        <text>@timeToShow Seconds ago</text>
+    }
+    }
     
         </td>
         <td>

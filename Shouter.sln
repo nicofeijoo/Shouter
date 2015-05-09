@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shouter", "Shouter\Shouter.csproj", "{6B678871-4B3E-4732-839B-607D569DF24B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegisterUser", "ConsoleApplication2\RegisterUser.csproj", "{788AE6FA-0B49-4AF6-9058-32CEAFC27F9A}"

@@ -20,6 +20,8 @@ namespace Shouter.Models
             MongoServer server = new MongoServer(settings);
             // Get our database instance to reach collections and data
             var database = server.GetDatabase("shouter");
+
+            
             return database;
         }
     }
